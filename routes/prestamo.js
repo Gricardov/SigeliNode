@@ -63,6 +63,14 @@ router.post('/actualizacion', function (req, res, next) {
     });
 });
 
+/*
+{
+    "datos":{
+         "codUsu":1001
+     }
+ }
+ */
+
 router.post('/misPrestamos', function (req, res, next) {
     
     var datos = req.body.datos;
@@ -70,7 +78,7 @@ router.post('/misPrestamos', function (req, res, next) {
     conexion.query("SELECT ID_PRES id, FEC_PRES fecPres, FEC_DEV_PRES fecDevPres, OBS_PRES observacion, DEVUELTO devuelto FROM PRESTAMO WHERE COD_USU=?",[datos.codUsu], function (err, result) {
         if (err) throw err;
 
-            res.json(result[0]);
+            res.json(result);
         
     });
 });
