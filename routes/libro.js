@@ -9,16 +9,11 @@ router.use(bodyParser.json());
 /*
     {
         "datos":{
-        	"codigo":1002,
-        	"nombres":"Manolo",
-        	"apPaterno":"Cabeza",
-        	"apMaterno":"De huevo",
-        	"dni":"71488754",
-        	"edad":21,
-        	"correo":"nmj@gmail.com",
-        	"telefono":"987564154",
-        	"login":"bruno",
-        	"contrasena":"mars"
+        	"id":1002,
+        	"nombre":"Manolo",
+        	"descripcion":"Cabeza",
+        	"idTipo":"De huevo",
+        	"idEstado":"71488754"
         }
     }    
 */
@@ -30,7 +25,7 @@ router.post('/listado', function (req, res, next) {
     ,[], function (err, result) {
         if (err) throw err;
         
-            res.json(result);
+            res.json(result[0]);
 
    });
 });
@@ -38,8 +33,8 @@ router.post('/listado', function (req, res, next) {
 router.post('/registro', function (req, res, next) {
     var datos = req.body.datos;
     
-    conexion.query("INSERT INTO USUARIO VALUES (NULL,?,?,?,?,?,?,?,?,?)"
-    ,[datos.nombres, datos.apPaterno, datos.apMaterno, datos.dni, datos.edad,datos.correo,datos.telefono,datos.login,datos.contrasena], function (err, result) {
+    conexion.query("INSERT INTO LIBRO VALUES (?,?,?,?,?)"
+    ,[datos.id, datos.nombre, datos.descripcion, datos.idTipo, datos.idEstado], function (err, result) {
         if (err) throw err;
         
             res.json(result);
@@ -50,8 +45,8 @@ router.post('/registro', function (req, res, next) {
 router.post('/actualizacion', function (req, res, next) {
     var datos = req.body.datos;
     
-    conexion.query("UPDATE USUARIO SET NOM_USU=?, APE_PAT_USU=?, APE_MAT_USU=?, DNI_USU=?, EDAD_USU=?, EMAIL_USU=?, TEL_USU=?, LOG_USU=?, CLA_USU=? WHERE COD_USU=?",
-    [datos.nombres, datos.apPaterno, datos.apMaterno, datos.dni, datos.edad,datos.correo,datos.telefono,datos.login,datos.contrasena,datos.codigo], function (err, result) {
+    conexion.query("UPDATE LIBRO SET NOM_LIB=?, DES_LIB=?, ID_TIP=?, ID_EST=? WHERE ID_LIB=?",
+    [datos.nombre, datos.descripcion, datos.idTipo, datos.idEstado, datos.id], function (err, result) {
         if (err) throw err;
 
         res.json(result);
@@ -62,7 +57,7 @@ router.post('/actualizacion', function (req, res, next) {
 router.post('/eliminacion', function (req, res, next) {
     var datos = req.body.datos;
     
-    conexion.query("DELETE FROM USUARIO WHERE COD_USU=?",[datos.codigo], function (err, result) {
+    conexion.query("DELETE FROM LIBRO WHERE ID_LIB=?",[datos.id], function (err, result) {
         if (err) throw err;
 
         res.json(result);
