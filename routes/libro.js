@@ -8,18 +8,17 @@ router.use(bodyParser.json());
 
 /*
     {
-        "datos":{
-        	"id":1002,
-        	"nombre":"Manolo",
-        	"descripcion":"Cabeza",
-        	"idTipo":"De huevo",
-        	"idEstado":"71488754"
+       "datos":{
+        	"id":2008,
+        	"nombre":"Manolo cabeza de huevo, la trilogia",
+        	"descripcion":"La descripción de mi libro",
+        	"idTipo":"3",
+        	"idEstado":"1"
         }
-    }    
+    }   
 */
 
 router.post('/listado', function (req, res, next) {
-    var datos = req.body.datos;
     
     conexion.query("CALL USP_OBTENER_LIBROS()"
     ,[], function (err, result) {
