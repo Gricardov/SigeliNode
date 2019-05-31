@@ -16,6 +16,18 @@ router.post('/listado', function (req, res, next) {
     });
 });
 
+/*
+    {
+       "datos":{
+        	"codUsu":1001,
+        	"idLib":2002,
+        	"fecFin":"2019-06-05 00:00:00",
+        	"idTipo":"4",
+        	"observacion":"Ninguna por ahora"
+        }
+    }
+*/
+
 router.post('/insercion', function (req, res, next) {
     
     var datos = req.body.datos;
@@ -28,11 +40,15 @@ router.post('/insercion', function (req, res, next) {
     });
 });
 
+/*
+
+*/
+
 router.post('/actualizacion', function (req, res, next) {
 
     var datos = req.body.datos;
 
-    conexion.query("UPDATE PRESTAMO SET FEC_DEV_PRES=?, OBS_PRES=?, DEVUELTO=?",[datos.fecDevPres,datos.observacion,datos.devuelto], function (err, result) {
+    conexion.query("UPDATE PRESTAMO SET FEC_DEV_PRES=?, OBS_PRES=?, DEVUELTO=? WHERE ID_PRES=?",[datos.fecDevPres,datos.observacion,datos.devuelto,datos.idPres], function (err, result) {
         if (err) throw err;
 
             res.json(result);
