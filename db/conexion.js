@@ -5,8 +5,8 @@ const fs = require('fs');
 var connection = mysql.createConnection({
     host: 'mysql-1412-0.cloudclusters.net',
     port: '10001',
-    user: 'temple',
-    password: 'temple',
+    user: 'sigeli',
+    password: 'sigeli',
     database: 'BDSIGELI',
     ssl:{
         ca: fs.readFileSync(__dirname+'/../certs/ca.pem')
