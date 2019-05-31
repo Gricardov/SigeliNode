@@ -16,4 +16,29 @@ router.post('/listado', function (req, res, next) {
     });
 });
 
+router.post('/insercion', function (req, res, next) {
+    
+    var datos = req.body.datos;
+
+    conexion.query("INSERT INTO PRESTAMO VALUES (NULL,?,?,CURDATE(),?,?,NULL)",[datos.codUsu,datos.idLib,datos.fecFin,datos.observacion], function (err, result) {
+        if (err) throw err;
+
+            res.json(result);
+        
+    });
+});
+
+router.post('/actualizacion', function (req, res, next) {
+
+    var datos = req.body.datos;
+
+    conexion.query("UPDATE PRESTAMO SET FEC_DEV_PRES=?, OBS_PRES=?, DEVUELTO=?",[datos.fecDevPres,datos.observacion,datos.devuelto], function (err, result) {
+        if (err) throw err;
+
+            res.json(result);
+        
+    });
+});
+
+// insertar y actualizar
 module.exports = router;
