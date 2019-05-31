@@ -41,7 +41,14 @@ router.post('/insercion', function (req, res, next) {
 });
 
 /*
-
+    {
+       "datos":{
+        	"fecDevPres":"2019-06-05 00:00:00",
+        	"observacion":"en mal estado",
+        	"devuelto":"2019-06-05 00:00:00",
+        	"idPres":"2"
+        }
+    }
 */
 
 router.post('/actualizacion', function (req, res, next) {
@@ -56,5 +63,16 @@ router.post('/actualizacion', function (req, res, next) {
     });
 });
 
-// insertar y actualizar
+router.post('/misPrestamos', function (req, res, next) {
+    
+    var datos = req.body.datos;
+
+    conexion.query("SELECT ID_PRES id, FEC_PRES fecPres, FEC_DEV_PRES fecDevPres, OBS_PRES observacion, DEVUELTO devuelto FROM PRESTAMO WHERE COD_USU=?",[datos.codUsu], function (err, result) {
+        if (err) throw err;
+
+            res.json(result[0]);
+        
+    });
+});
+
 module.exports = router;
