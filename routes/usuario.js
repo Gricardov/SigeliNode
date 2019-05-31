@@ -9,7 +9,7 @@ router.use(bodyParser.json());
 router.post('/login', function (req, res, next) {
     var datos = req.body.datos;
     
-    conexion.query("SELECT*FROM USUARIO WHERE LOG_USU = ? AND CLA_USU = ?",[datos.login, datos.contrasena], function (err, result) {
+    conexion.query("SELECT COD_USU codigo, NOM_USU nombre, APE_PAT_USU apPaterno, APE_MAT_USU apMaterno, DNI_USU dni, EDAD_USU edad FROM USUARIO WHERE LOG_USU = ? AND CLA_USU = ?",[datos.login, datos.contrasena], function (err, result) {
         if (err) throw err;
 
         else if (result.length == 0) {
