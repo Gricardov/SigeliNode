@@ -6,6 +6,23 @@ var conexion = require('../db/conexion');
 
 router.use(bodyParser.json());
 
+/*
+    {
+        "datos":{
+        	"codigo":1002,
+        	"nombres":"Manolo",
+        	"apPaterno":"Cabeza",
+        	"apMaterno":"De huevo",
+        	"dni":"71488754",
+        	"edad":21,
+        	"correo":"nmj@gmail.com",
+        	"telefono":"987564154",
+        	"login":"bruno",
+        	"contrasena":"mars"
+        }
+    }    
+*/
+
 router.post('/login', function (req, res, next) {
     var datos = req.body.datos;
     

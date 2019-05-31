@@ -58,3 +58,43 @@ PRIMARY KEY (ID_PRES)
 ALTER TABLE PRESTAMO
 ADD FOREIGN KEY (COD_USU) REFERENCES USUARIO (COD_USU),
 ADD FOREIGN KEY (ID_LIB) REFERENCES LIBRO (ID_LIB);
+
+-- PROCEDIMIENTOS
+
+DELIMITER //
+
+CREATE PROCEDURE USP_OBTENER_LIBROS()
+BEGIN
+SELECT L.ID_LIB id, L.NOM_LIB nombre, L.DES_LIB descripcion, TL.DES_TIP, EL.DES_EST
+FROM LIBRO L
+INNER JOIN TIPO_LIBRO TL
+ON L.ID_TIP=TL.ID_TIP
+INNER JOIN ESTADO_LIBRO EL
+ON L.ID_EST=EL.ID_EST;
+END; //
+
+DELIMITER ;
+
+-- INSERT
+
+INSERT INTO USUARIO VALUES (NULL,'Vanesita','Linda','Bella','78454154',22,'vane@gmail.com','987654321','vane','sita');
+
+INSERT INTO TIPO_LIBRO VALUES (1,'Acción'),(2,'Romántico'),(3,'Comedia'),(4,'Aventura'),(5,'Misterio'),(6,'Ciencia ficción');
+
+INSERT INTO ESTADO_LIBRO VALUES (1,'Disponible'),(2,'Prestado'),(3,'Retirado');
+
+INSERT INTO LIBRO VALUES 	(1001,'El pez','Lorem ipsum...',6,1),
+							(2000,'Kristy Wells','Lorem ipsum...',2,1),
+                            (2001,'Eu nao falo portugues muito bem','Lorem ipsum...',4,1),
+                            (2002,'¿Y dónde está el perro?','Lorem ipsum...',6,1),
+                            (2003,'Buscando el amor','Lorem ipsum...',2,1),
+                            (2004,'Señoritas, señoritas','Lorem ipsum...',4,1),
+                            (2005,'Autocondicionamiento','Lorem ipsum...',4,1),
+                            (2006,'Pablito, Pedrito y los polímeros','Lorem ipsum...',3,1);
+                          
+
+
+SELECT*FROM USUARIO;
+SELECT*FROM LIBRO;
+SELECT*FROM TIPO_LIBRO;
+SELECT*FROM ESTADO_LIBRO;
