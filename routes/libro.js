@@ -63,4 +63,27 @@ router.post('/eliminacion', function (req, res, next) {
     });
 });
 
+// Para obtener los valores de tipo y estado
+router.post('/obtenerTipos', function (req, res, next) {
+    
+    conexion.query("SELECT ID_TIP id, DES_TIP descripcion FROM TIPO_LIBRO"
+    ,[], function (err, result) {
+        if (err) throw err;
+        
+            res.json(result);
+
+   });
+});
+
+router.post('/obtenerEstados', function (req, res, next) {
+    
+    conexion.query("SELECT ID_EST id, DES_EST descripcion FROM ESTADO_LIBRO"
+    ,[], function (err, result) {
+        if (err) throw err;
+        
+            res.json(result);
+
+   });
+});
+
 module.exports = router;
