@@ -21,26 +21,35 @@ router.use(bodyParser.json());
 router.post('/obtener', function (req, res, next) {
 
     var datos = req.body.datos;
-
+    console.log("datos "+datos)
     var parametros = []
 
     if (datos && datos.nombre) {
         parametros.push(datos.nombre)
     }
 
-    conexion.query(
-
-        parametros.length > 0
-            ?
+    if (parametros.length > 0) {
+        conexion.query(
             "CALL USP_OBTENER_LIBROS(?)"
-            :
-            "CALL USP_OBTENER_LIBROS(NULL)"
-        , [], function (err, result) {
-            if (err) throw err;
+            , [datos.nombre], function (err, result) {
+                if (err) throw err;
 
-            res.json(result[0]);
+                res.json(result[0]);
 
-        });
+            });
+    }
+    else {
+        conexion.query(
+            "SELECT*FROM LIBRO"
+            , [], function (err, result) {
+                if (err) throw err;
+
+                res.json(result);
+
+            });
+    }
+
+
 });
 
 router.post('/registro', function (req, res, next) {
