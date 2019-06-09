@@ -21,7 +21,7 @@ router.use(bodyParser.json());
 router.post('/obtener', function (req, res, next) {
 
     var datos = req.body.datos;
-    console.log("datos "+datos)
+    console.log("datos "+JSON.stringify(datos))
     var parametros = []
 
     if (datos && datos.nombre) {
