@@ -75,7 +75,8 @@ router.post('/misPrestamos', function (req, res, next) {
     
     var datos = req.body.datos;
 
-    conexion.query("SELECT ID_PRES id, FEC_PRES fecPres, FEC_DEV_PRES fecDevPres, OBS_PRES observacion, DEVUELTO devuelto FROM PRESTAMO WHERE COD_USU=?",[datos.codUsu], function (err, result) {
+    conexion.query(`SELECT ID_PRES id, ID_LIB idLib, FEC_PRES fecPres, FEC_DEV_PRES fecDevPres, OBS_PRES observacion, 
+    DEVUELTO devuelto FROM PRESTAMO WHERE COD_USU=?`,[datos.codUsu], function (err, result) {
         if (err) throw err;
 
             res.json(result);
