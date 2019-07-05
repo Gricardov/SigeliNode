@@ -28,9 +28,15 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+try{
+
 app.use('/usuario', usuario);
 app.use('/libro', libro);
 app.use('/prestamo', prestamo);
+
+} catch(e){
+  
+}
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
