@@ -75,8 +75,8 @@ router.post('/misPrestamos', function (req, res, next) {
     
     var datos = req.body.datos;
 
-    conexion.query(`SELECT ID_PRES id, ID_LIB idLib, FEC_PRES fecPres, FEC_DEV_PRES fecDevPres, OBS_PRES observacion, 
-    DEVUELTO devuelto FROM PRESTAMO WHERE COD_USU=?`,[datos.codUsu], function (err, result) {
+    conexion.query(`SELECT P.ID_PRES idPres, P.ID_LIB idLib, P.FEC_PRES fecPres, P.FEC_DEV_PRES fecDevPres, P.OBS_PRES observacion, 
+    P.DEVUELTO devuelto, L.NOM_LIB nombre FROM PRESTAMO P INNER JOIN LIBRO L ON P.ID_LIB=L.ID_LIB WHERE P.COD_USU=?`,[datos.codUsu], function (err, result) {
         if (err) throw err;
 
             res.json(result);
