@@ -28,26 +28,16 @@ router.post('/obtener', function (req, res, next) {
         parametros.push(datos.nombre)
     }
 
-    if (parametros.length > 0) {
+  
         conexion.query(
-            "CALL USP_OBTENER_LIBROS()"
-            , function (err, result) {
+            "CALL USP_OBTENER_LIBROS(?)"
+            ,[datos.nombre], function (err, result) {
                 if (err) throw err;
 
                 res.json(result[0]);
 
             });
-    }
-    else {
-        conexion.query(
-            "SELECT*FROM LIBRO"
-            , [], function (err, result) {
-                if (err) throw err;
-
-                res.json(result);
-
-            });
-    }
+   
 
 
 });
